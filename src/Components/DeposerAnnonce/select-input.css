@@ -1,0 +1,28 @@
+select.widthHeight::-webkit-scrollbar {
+  width: 10px;
+}
+
+select.style::-webkit-scrollbar-track {
+  border: rgb(180, 180, 180);
+  background-color: #1b1b1b;
+}
+
+select.style::-webkit-scrollbar-thumb {
+  background-color: #ff9505;
+  border: 1px solid rgb(193, 193, 193);
+}
+
+#label-file-upload.drag-active {
+  background-color: #ffffff;
+}
+
+#drag-file-element {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
