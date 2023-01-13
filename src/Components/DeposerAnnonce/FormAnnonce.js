@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable eqeqeq */
-import { React, useState, useEffect } from "react";
+import axios from "axios";
+import { React, useState } from "react";
 import Input from "./input";
 import Picture from "./pictureInput";
 import Button from "./buttonSubmit";
@@ -17,7 +18,7 @@ function getcommunes(wilaya) {
   });
   return communeslist;
 }
-const FormAnnonce = () => {
+const FormAnnonce = (props) => {
   const [description, setdescription] = useState("");
   const [file, setfile] = useState("");
   const [prix, setprix] = useState(0);
@@ -78,18 +79,23 @@ const FormAnnonce = () => {
   }
 
   function handlesubmit() {
-    console.log(
-      prix,
-      superficie,
-      numtel,
-      titre,
-      typeAnnonce,
-      typeBien,
-      wilayaSelected,
-      communeSelected,
-      file,
-      description
-    );
+    const annonce = {
+      categorie: typeBien,
+      type_annonce: typeAnnonce,
+      surface: superficie,
+      description: description,
+      prix: prix,
+      id_contact: props.userid,
+      wilaya: wilayaSelected,
+      commune: communeSelected,
+      image: file,
+      titre: titre,
+      date_publication: new Date().toISOString().slice(0, 10),
+      telephone: numtel,
+    };
+    axios
+      .post("http://localhost:8000/DeposerAnnonce/", annonce)
+      .then((response) => console.log(response.data));
   }
 
   return (
