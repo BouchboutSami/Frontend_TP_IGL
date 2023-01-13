@@ -15,6 +15,7 @@ const Select = (props) => {
       <select
         className="w-full bg-IGLnoir border-0 border-b-2 border-IGLgris text-IGLgris outline-none style widthHeight"
         onChange={handleChange}
+        required
       >
         {props.options.map((option) => (
           <option

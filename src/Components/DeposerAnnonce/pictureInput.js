@@ -11,7 +11,12 @@ const PictureInput = (props) => {
   return (
     <div className="relative w-full h-48 bg-transparent border-2 border-IGLgris text-IGLblanc flex flex-col items-center justify-center">
       <label className="absolute top-4 left-4">Importer une image *</label>
-      <input type="file" onChange={handleChange} accept="image/*"></input>
+      <input
+        type="file"
+        onChange={handleChange}
+        accept="image/* "
+        required
+      ></input>
     </div>
   );
 };
