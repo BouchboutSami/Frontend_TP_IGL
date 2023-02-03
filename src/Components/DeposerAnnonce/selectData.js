@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import wilayacommune from "./donnees_communes.json";
 
 const TypeData = [
@@ -21,14 +22,30 @@ const TypeBien = [
 
 const wilaya = [{ value: "", text: "Wilaya *" }];
 let wilayas = [];
+let codeWilaya = [];
 wilayacommune.forEach((commune) => {
   if (!(commune.wilaya in wilayas)) wilayas.push(commune.wilaya);
+  codeWilaya.push(commune.wilaya_code);
 });
 wilayas = wilayas.filter((item, index) => wilayas.indexOf(item) === index);
+codeWilaya = codeWilaya.filter(
+  (item, index) => codeWilaya.indexOf(item) === index
+);
 
 wilayas.forEach((w) => {
   wilaya.push({ value: w, text: w });
 });
-const data = [TypeData, TypeBien, wilaya];
+
+function WilayaToCode(wilaya) {
+  let code = 0;
+  wilayacommune.forEach((commune) => {
+    if (commune.wilaya == wilaya) {
+      code = commune.wilaya_code;
+    }
+  });
+  return parseInt(code);
+}
+
+const data = [TypeData, TypeBien, wilaya, WilayaToCode];
 
 export default data;
