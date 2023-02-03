@@ -18,6 +18,7 @@ function getcommunes(wilaya) {
   });
   return communeslist;
 }
+
 const FormAnnonce = (props) => {
   const [description, setdescription] = useState("");
   const [file, setfile] = useState("");
@@ -93,6 +94,7 @@ const FormAnnonce = (props) => {
       date_publication: new Date().toISOString().slice(0, 10),
       telephone: numtel,
     };
+    console.log(annonce);
     axios
       .post("http://localhost:8000/DeposerAnnonce/", annonce)
       .then((response) => console.log(response.data));
@@ -137,7 +139,7 @@ const FormAnnonce = (props) => {
           placeholder="Description de l'annonce *"
           type="text"
         />
-        <Button id="11" Submit={handlesubmit} />
+        <Button id="11" Submit={handlesubmit} text="Déposer l'annonce" />
       </form>
     </div>
   );

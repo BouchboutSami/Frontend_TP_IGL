@@ -20,7 +20,7 @@ const buttonSubmit = (props) => {
         },
       }}
     >
-      Déposer l'annonce
+      {props.text}
     </Button>
   );
 };
