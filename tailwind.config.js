@@ -12,18 +12,18 @@ module.exports = {
         IGLnoir: "#1B1B1B",
         IGLblanc: "#FFFBFB",
         IGLgris: "#D9D9D9",
-        IGLbgLogin : "#2C2B2B",
+        IGLbgLogin: "#2C2B2B",
       },
       backgroundImage: {
-        'login-bg': "url('/public/loginBG.png')",
+        "login-bg": "url('./Components/Login/loginBG.png')",
       },
       height: {
-        '90vh': "90vh",
-        '616':"616px",
+        "90vh": "90vh",
+        616: "616px",
       },
       width: {
-        '462': '462px',
-      }
+        462: "462px",
+      },
     },
   },
   plugins: [],

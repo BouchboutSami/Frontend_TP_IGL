@@ -1,0 +1,22 @@
+.navbar {
+  padding: 30px 50px 30px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar a {
+  color: whitesmoke;
+}
+.navbar .logo {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.active {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}

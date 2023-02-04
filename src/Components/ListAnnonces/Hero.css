@@ -1,0 +1,10 @@
+.heroS {
+  background-image: url("./assets/backgroundimage.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-y: hidden;
+}
+
+.titre {
+  line-height: 100px;
+}
