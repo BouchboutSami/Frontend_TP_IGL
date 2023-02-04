@@ -11,11 +11,11 @@ const Scraping = () => {
     if (wilayaSelected === 0) {
       alert("Choisissez la wilaya dont vous voulez scraper les annonces");
     } else {
-      const wilaya = wilayaSelected;
+      const val = wilayaSelected;
       setloading(true);
       console.log("Sarted Scraping");
       axios
-        .post("http://localhost:8000/scrap/", { wilaya })
+        .post("http://localhost:8000/scrap/", { val })
         .then((response) => {
           console.log("Finished Scraping");
           setData([...data, ...response.data]);
