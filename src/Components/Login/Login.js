@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { Routes, Route, NavLink, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Button from "../DeposerAnnonce/buttonSubmit";
 import Hidepass from "./Hidepass.png";
 import Showpass from "./Showpass.png";
@@ -11,7 +11,9 @@ import Showpass from "./Showpass.png";
 const clientId =
   "131501766158-j4k1h6q02t1acs5qic094vl34jcsbj0n.apps.googleusercontent.com";
 
-function Login() {
+function Login(props) {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +41,7 @@ function Login() {
     setEmail(userGoogle.email);
     setPassword(userGoogle.sub);
     setUsername(userGoogle.name);
-    setGoogleAuth(true);
+    setGoogleAuth(!googleAuth);
     setError("Connected");
   };
 
@@ -62,20 +64,28 @@ function Login() {
                 .post("http://localhost:8000/getUserbyID", user)
                 .then((response) => {
                   user.id = response.data[0];
-                  console.log(user);
+                  user.isadmin = response.data[1];
+                  setUserConnected(user);
                 });
             } else {
               axios
                 .post("http://localhost:8000/Signup", user)
                 .then((response) => {
                   console.log("insertion");
-                  console.log(response.data);
+                  setUserConnected(response.data);
                 });
             }
           });
       }
     }
   }, [googleAuth]);
+
+  useEffect(() => {
+    if (Object.keys(userConnected).length !== 0) {
+      props.onLogin(userConnected);
+      navigate("/", { state: userConnected });
+    }
+  }, [navigate, props, userConnected]);
 
   const handleGoogleFailure = (response) => {
     console.log(response);
@@ -94,7 +104,6 @@ function Login() {
           .post("http://localhost:8000/getUserbyID", user)
           .then((response) => {
             user.id = response.data[0];
-            console.log(user);
             setError("Connected");
           });
       } else {
@@ -103,11 +112,13 @@ function Login() {
     });
   };
 
-  const switchPage = (event) => {};
+  const switchPage = (event) => {
+    navigate("/Signup");
+  };
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <div className="Content font-thin bg-login-bg h-full w-full bg-no-repeat bg-cover flex justify-center items-center ">
+      <div className="Content font-thin bg-login-bg h-screen w-full bg-no-repeat bg-cover flex justify-center items-center ">
         <div className="Login bg-IGLbgLogin bg-opacity-90 w-462 h-616 flex justify-center items-center rounded-xl ">
           <form className=" text-IGLblanc rounded-lg shadow-md font-montserrat flex flex-col items-center justify-center gap-6">
             <h2 className="text-3xl  font-montserrat font-bold  mb-4 text-center">

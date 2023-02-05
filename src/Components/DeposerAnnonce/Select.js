@@ -11,9 +11,9 @@ const Select = (props) => {
   };
 
   return (
-    <div className="w-2/5">
+    <div className={`${props.width}`}>
       <select
-        className="w-full bg-IGLnoir border-0 border-b-2 border-IGLgris text-IGLgris outline-none style widthHeight"
+        className="w-full bg-inherit border-0 border-b-2 border-IGLgris text-IGLgris outline-none style widthHeight"
         onChange={handleChange}
         required
       >
@@ -22,6 +22,7 @@ const Select = (props) => {
             disabled={option.disabled}
             key={option.text}
             value={option.value}
+            className="bg-IGLnoir"
           >
             {option.text}
           </option>

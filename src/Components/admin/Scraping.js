@@ -17,7 +17,7 @@ const Scraping = () => {
       axios
         .post("http://localhost:8000/scrap/", { val })
         .then((response) => {
-          console.log("Finished Scraping");
+          console.log(response.data);
           setData([...data, ...response.data]);
           setloading(false);
         })

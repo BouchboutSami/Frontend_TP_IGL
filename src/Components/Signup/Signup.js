@@ -1,6 +1,7 @@
-import { React, useState, useEffect, useSyncExternalStore } from "react";
+import { React, useState, useEffect } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
+import { Routes, Route, NavLink, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import Button from "../DeposerAnnonce/buttonSubmit";
 import Hidepass from "../Login/Hidepass.png";
@@ -11,6 +12,7 @@ const clientId =
   "131501766158-j4k1h6q02t1acs5qic094vl34jcsbj0n.apps.googleusercontent.com";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,8 +21,6 @@ const Signup = () => {
     "Vérifiez votre Adresse mail et/ou Mot de passe"
   );
   const [userConnected, setUserConnected] = useState({});
-
-  var img = "./Showpass.png";
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -36,7 +36,6 @@ const Signup = () => {
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
-    img = showPassword ? "./Hidepass.png" : "./Showpass.png";
   };
 
   const handleGoogleSuccess = (response) => {
@@ -86,14 +85,16 @@ const Signup = () => {
     }
   }, [username, email, password]);
 
-  const switchPage = () => {};
+  const switchPage = () => {
+    navigate("/login");
+  };
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <div className="Content font-thin bg-login-bg h-full w-full bg-no-repeat bg-cover flex justify-center items-center ">
+      <div className="Content font-thin bg-login-bg h-screen w-full bg-no-repeat bg-cover flex justify-center items-center ">
         <div className="Login bg-IGLbgLogin bg-opacity-90 w-462 h-616 flex justify-center items-center rounded-xl ">
           <form className=" text-IGLblanc p-6 rounded-lg shadow-md font-montserrat flex flex-col items-center justify-center  gap-4">
-            <h2 className="text-3xl text-IGLblanc font-inter font-bold  mb-4 text-center">
+            <h2 className="text-3xl  font-montserrat font-bold  mb-4 text-center">
               Inscription
             </h2>
             {Error.length > 13 ? (

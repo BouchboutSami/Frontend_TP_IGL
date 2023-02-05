@@ -15,7 +15,7 @@ const Input = (props) => {
         <div className="w-2/5 flex flex-row">
           <input
             type="text"
-            className="w-full bg-transparent border-b-2 outline-none placeholder:text-IGLblanc"
+            className="w-full bg-transparent border-b-2 outline-none placeholder:text-IGLblanc placeholder:text-left"
             placeholder={props.placeholder}
             onChange={handleChange}
           ></input>
@@ -23,7 +23,7 @@ const Input = (props) => {
       );
     case 6:
       return (
-        <div className="w-2/5 flex flex-row">
+        <div className={`w-2/5 flex flex-row`}>
           <input
             type="number"
             className="w-full bg-transparent border-b-2 outline-none placeholder:text-IGLblanc"

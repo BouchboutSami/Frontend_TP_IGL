@@ -1,9 +1,9 @@
 import React from "react";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
-    <nav className="navbar flex flex-row items-center absolute">
+    <nav className="navbar flex flex-row items-center fixed overflow-hidden">
       <a href="/" className="logo flex flex-row items-center">
         Dream Home
       </a>
@@ -13,10 +13,14 @@ const Navbar = () => {
             <a href="/">Acceuil</a>
           </li>
           <li className="active">
-            <a href="/">A propos</a>
+            {props.user.isadmin ? (
+              <a href="/AdminScraping">Admin Panel</a>
+            ) : (
+              <a href="/">A propos</a>
+            )}
           </li>
           <li className="active">
-            <a href="/">Mon compte</a>
+            <a href="/">{props.user.username}</a>
           </li>
         </ul>
       </div>

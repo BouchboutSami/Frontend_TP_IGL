@@ -8,6 +8,7 @@ import Button from "./buttonSubmit";
 import Select from "./Select";
 import Data from "./selectData";
 import wilayacommune from "./donnees_communes.json";
+import Navbar from "../Navbar/Navbar";
 
 function getcommunes(wilaya) {
   let communeslist = [{ value: "", text: "Commune" }];
@@ -101,46 +102,70 @@ const FormAnnonce = (props) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-items-center gap-16 w-1/2 bg-IGLnoir text-IGLblanc font-montserrat overflow-clip">
-      <h1 className="self-start font-bold text-4xl">Déposer une annonce</h1>
-      <form className="flex flex-row flex-wrap w-full justify-between text-center gap-16">
-        <Select id="1" options={Data[0]} Change={handlechange} />
-        <Select id="2" options={Data[1]} Change={handlechange} />
-        <Select id="3" options={Data[2]} Change={handlechange} />
-        <Select id="4" options={communes} Change={handlechange} />
-        <Input
-          id="5"
-          Change={handlechange}
-          placeholder="Titre de l'annonce *"
-          type="text"
-        />
-        <Input
-          id="6"
-          Change={handlechange}
-          placeholder="Numéro de téléphone *"
-          type="number"
-        />
-        <Input
-          id="7"
-          Change={handlechange}
-          placeholder="Superficie *"
-          type="number"
-        />
-        <Input
-          id="8"
-          Change={handlechange}
-          placeholder="Prix *"
-          type="number"
-        />
-        <Picture id="9" Change={handlechange} />
-        <Input
-          id="10"
-          Change={handlechange}
-          placeholder="Description de l'annonce *"
-          type="text"
-        />
-        <Button id="11" Submit={handlesubmit} text="Déposer l'annonce" />
-      </form>
+    <div className="w-full h-full flex flex-col items-center">
+      <Navbar />
+      <div className="py-24 flex flex-col items-center justify-items-center gap-16 w-1/2 bg-IGLnoir text-IGLblanc font-montserrat overflow-clip">
+        <h1 className="self-start font-bold text-4xl">Déposer une annonce</h1>
+        <form className="flex flex-row flex-wrap w-full justify-between text-center gap-16">
+          <Select
+            id="1"
+            options={Data[0]}
+            Change={handlechange}
+            width="w-full"
+          />
+          <Select
+            id="2"
+            options={Data[1]}
+            Change={handlechange}
+            width="w-full"
+          />
+          <Select
+            id="3"
+            options={Data[2]}
+            Change={handlechange}
+            width="w-full"
+          />
+          <Select
+            id="4"
+            options={communes}
+            Change={handlechange}
+            width="w-full"
+          />
+          <Input
+            id="5"
+            Change={handlechange}
+            placeholder="Titre de l'annonce *"
+            type="text"
+          />
+          <Input
+            id="6"
+            Change={handlechange}
+            placeholder="Numéro de téléphone *"
+            type="number"
+            width="2/5"
+          />
+          <Input
+            id="7"
+            Change={handlechange}
+            placeholder="Superficie *"
+            type="number"
+          />
+          <Input
+            id="8"
+            Change={handlechange}
+            placeholder="Prix *"
+            type="number"
+          />
+          <Picture id="9" Change={handlechange} />
+          <Input
+            id="10"
+            Change={handlechange}
+            placeholder="Description de l'annonce *"
+            type="text"
+          />
+          <Button id="11" Submit={handlesubmit} text="Déposer l'annonce" />
+        </form>
+      </div>
     </div>
   );
 };
