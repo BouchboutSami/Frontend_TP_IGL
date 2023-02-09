@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { Routes, Route, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Button from "../DeposerAnnonce/buttonSubmit";
@@ -82,8 +83,10 @@ function Login(props) {
 
   useEffect(() => {
     if (Object.keys(userConnected).length !== 0) {
+      console.log("hello");
       props.onLogin(userConnected);
-      navigate("/", { state: userConnected });
+      const user = userConnected;
+      navigate("/", { state: { user } });
     }
   }, [navigate, props, userConnected]);
 
@@ -104,7 +107,12 @@ function Login(props) {
           .post("http://localhost:8000/getUserbyID", user)
           .then((response) => {
             user.id = response.data[0];
+            user.isadmin = response.data[1];
+            user.username = response.data[2];
+            setUserConnected(user);
             setError("Connected");
+            props.onLogin(user);
+            navigate("/", { state: { user } });
           });
       } else {
         setError("Les identifiants ci-dessous sont incorrectes");
@@ -189,7 +197,7 @@ function Login(props) {
               Vous n’avez pas de compte?{" "}
               <span className="text-IGLorange">
                 {" "}
-                <button onClick={switchPage}>S’inscrire</button>{" "}
+                <button onClick={switchPage}>S’inscrire</button>
               </span>
             </div>
           </form>

@@ -1,26 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = (props) => {
+  const navigate = useNavigate();
+  const [userConnected, setuserConnected] = useState({});
+
+  useEffect(() => {
+    setuserConnected(props.user);
+  }, [props.user, userConnected]);
+
   return (
-    <nav className="navbar flex flex-row items-center fixed overflow-hidden">
-      <a href="/" className="logo flex flex-row items-center">
-        Dream Home
-      </a>
+    <nav className="navbar flex flex-row items-center overflow-hidden">
+      <Link to="/" state={{ user: userConnected }}>
+        <p className="logo flex flex-row items-center text-IGLblanc">
+          Dream Home
+        </p>
+      </Link>
       <div className="nav-links text-inter">
-        <ul className="flex flex-row items-center justify-end gap-16">
+        <ul className="flex flex-row items-center justify-end gap-16 text-IGLblanc">
           <li className="active">
-            <a href="/">Acceuil</a>
+            <Link to="/DeposerAnnonce" state={{ user: userConnected }}>
+              Deposer Annonce
+            </Link>
+          </li>
+
+          {userConnected.isadmin ? (
+            <li className="active">
+              <Link to="/AdminScraping" state={{ user: userConnected }}>
+                <p className="flex flex-row items-center text-IGLblanc">
+                  Admin Panel
+                </p>
+              </Link>
+            </li>
+          ) : null}
+
+          <li className="active">
+            <Link to="/MonCompte" state={{ user: userConnected }}>
+              {userConnected.username}
+            </Link>
           </li>
           <li className="active">
-            {props.user.isadmin ? (
-              <a href="/AdminScraping">Admin Panel</a>
-            ) : (
-              <a href="/">A propos</a>
-            )}
-          </li>
-          <li className="active">
-            <a href="/">{props.user.username}</a>
+            <Link to="/Login">Déconnexion</Link>
           </li>
         </ul>
       </div>

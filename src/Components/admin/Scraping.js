@@ -1,12 +1,20 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Button from "../DeposerAnnonce/buttonSubmit";
 import Select from "../DeposerAnnonce/Select";
 import Data from "../DeposerAnnonce/selectData";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Cardannonce from "../ListAnnonces/CardAnnonce";
+import Navbar from "../Navbar/Navbar";
+import Alert from "@mui/material/Alert";
+import Listusers from "./Listusers";
 
 const Scraping = () => {
+  const location = useLocation();
+
   function handleSubmit() {
+    setData([]);
     seterrorScraping(false);
     if (wilayaSelected === 0) {
       alert("Choisissez la wilaya dont vous voulez scraper les annonces");
@@ -17,7 +25,6 @@ const Scraping = () => {
       axios
         .post("http://localhost:8000/scrap/", { val })
         .then((response) => {
-          console.log(response.data);
           setData([...data, ...response.data]);
           setloading(false);
         })
@@ -39,37 +46,44 @@ const Scraping = () => {
   const [data, setData] = useState([]);
   const [errorScraping, seterrorScraping] = useState(false);
   const [wilayaSelected, setwilayaSelected] = useState(0);
+  const [userConnected, setUserConnected] = useState({});
+  useEffect(() => {
+    setUserConnected(location.state.user);
+  }, [location]);
 
   return (
-    <div className="w-1/2 flex flex-col justify-center items-center gap-10">
-      <Select id="1" options={Data[2]} Change={handlechange} />
-      <Button
-        id="1"
-        text="Importer des annonces externes"
-        Submit={handleSubmit}
-      />
-      {(loading && (
-        <div className="flex flex-col justify-center items-center gap-4">
-          <CircularProgress />
-          <p className="text-IGLblanc font-montserrat">Data Loading</p>
+    <div className="w-screen min-h-screen flex flex-col justify-center items-center">
+      <Navbar user={userConnected} />
+      <div className="w-1/2 flex flex-col items-center gap-10 min-h-screen">
+        <label className="text-xl text-IGLorange">Choisir la wilaya</label>
+        <Select id="1" options={Data[2]} Change={handlechange} />
+        <Button
+          id="1"
+          text="Importer des annonces externes"
+          Submit={handleSubmit}
+        />
+        {(loading && (
+          <div className="flex flex-col justify-center items-center gap-4">
+            <CircularProgress />
+            <p className="text-IGLblanc font-montserrat">Data Loading</p>
+          </div>
+        )) ||
+          null}
+        <div className="grid grid-cols-2 justify-center items-center gap-6">
+          {data.length > 0 &&
+            data.map((annonce, i) => {
+              annonce = Object.values(annonce);
+              annonce.unshift(-1);
+              return <Cardannonce data={annonce} key={i} />;
+            })}
         </div>
-      )) || <p className="text-IGLblanc font-montserrat">Admin Panel</p>}
-      {data.length > 0 &&
-        data.map((annonce, i) => {
-          return (
-            <img
-              key={i}
-              className="text-IGLblanc font-montserrat"
-              src={`data:image/jpeg;base64,${annonce.image}`}
-              alt="Apercu l'annonce"
-            />
-          );
-        })}
-      {errorScraping && (
-        <p className="text-IGLblanc font-montserrat">
-          Erreur lors de l'opération du Web Scraping
-        </p>
-      )}
+        {errorScraping && (
+          <Alert variant="filled" severity="error">
+            Erreur lors de l'opération du Web scraping
+          </Alert>
+        )}
+        <Listusers />
+      </div>
     </div>
   );
 };

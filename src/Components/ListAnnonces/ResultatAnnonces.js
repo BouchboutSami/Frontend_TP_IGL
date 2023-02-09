@@ -4,8 +4,13 @@ import GridAnnonces from "./GridAnnonces";
 import Filtres from "./filtres";
 import { useState, useRef, useEffect } from "react";
 
-const ResultatAnnonces = () => {
+const ResultatAnnonces = (props) => {
   const [Annonces, setAnnonces] = useState([]);
+  const [userConnected, setuserConnected] = useState({});
+
+  useEffect(() => {
+    setuserConnected(props.user);
+  }, [props, userConnected]);
 
   const firstRender = useRef(true);
 
@@ -36,7 +41,12 @@ const ResultatAnnonces = () => {
         Résultats de la Recherche
       </h1>
       <Filtres onChange={filtre} />
-      <GridAnnonces data={Annonces} />
+      <GridAnnonces
+        data={Annonces}
+        user={userConnected}
+        error="Aucune annonce ne correspond à votre recherche"
+        nbcol="3"
+      />
     </div>
   );
 };

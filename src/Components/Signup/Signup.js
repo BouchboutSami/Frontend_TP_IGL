@@ -11,7 +11,7 @@ import axios from "axios";
 const clientId =
   "131501766158-j4k1h6q02t1acs5qic094vl34jcsbj0n.apps.googleusercontent.com";
 
-const Signup = () => {
+const Signup = (props) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -58,10 +58,11 @@ const Signup = () => {
         username: username,
         email: email,
         password: password,
+        isadmin: 0,
       };
       axios.post("http://localhost:8000/UserExists", user).then((response) => {
         if (response.data) {
-          setError("Adresse Mail déja Existante !");
+          setError("Adresse Mail déja Existante ! (Se connecter)");
         } else {
           axios.post("http://localhost:8000/Signup", user).then((response) => {
             console.log(response.data);
@@ -85,6 +86,15 @@ const Signup = () => {
     }
   }, [username, email, password]);
 
+  useEffect(() => {
+    if (Object.keys(userConnected).length !== 0) {
+      console.log("hello");
+      props.onLogin(userConnected);
+      const user = userConnected;
+      navigate("/", { state: { user } });
+    }
+  }, [userConnected]);
+
   const switchPage = () => {
     navigate("/login");
   };
@@ -98,7 +108,7 @@ const Signup = () => {
               Inscription
             </h2>
             {Error.length > 13 ? (
-              <p className="text-IGLorange text-sm">{Error}</p>
+              <p className="text-IGLorange text-sm text-center">{Error}</p>
             ) : (
               <p className="text-[#6ed243] text-sm">Valid format</p>
             )}
