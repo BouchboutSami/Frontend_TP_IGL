@@ -9,6 +9,7 @@ import Select from "./Select";
 import Data from "./selectData";
 import wilayacommune from "./donnees_communes.json";
 import Navbar from "../Navbar/Navbar";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function getcommunes(wilaya) {
   let communeslist = [{ value: "", text: "Commune" }];
@@ -21,6 +22,8 @@ function getcommunes(wilaya) {
 }
 
 const FormAnnonce = (props) => {
+  let navigate = useNavigate();
+  let { state } = useLocation();
   const [description, setdescription] = useState("");
   const [file, setfile] = useState("");
   const [prix, setprix] = useState(0);
@@ -67,7 +70,8 @@ const FormAnnonce = (props) => {
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = () => {
-          const base64 = reader.result;
+          let base64 = reader.result;
+          base64 = base64.substring(23);
           setfile(base64);
         };
         break;
@@ -87,7 +91,7 @@ const FormAnnonce = (props) => {
       surface: superficie,
       description: description,
       prix: prix,
-      id_contact: props.userid,
+      id_contact: state.user.id,
       wilaya: wilayaSelected,
       commune: communeSelected,
       image: file,
@@ -95,16 +99,22 @@ const FormAnnonce = (props) => {
       date_publication: new Date().toISOString().slice(0, 10),
       telephone: numtel,
     };
-    console.log(annonce);
-    axios
-      .post("http://localhost:8000/DeposerAnnonce/", annonce)
-      .then((response) => console.log(response.data));
+    const fullData = Object.values(annonce).every((x) => x !== 0 && x !== "");
+    if (fullData) {
+      axios
+        .post("http://localhost:8000/DeposerAnnonce/", annonce)
+        .then((response) => console.log(response.data));
+      const user = state.user;
+      navigate("/", { state: { user } });
+    } else {
+      alert("Veuillez Remplir l'intégralité du formulaire");
+    }
   }
 
   return (
     <div className="w-full h-full flex flex-col items-center">
-      <Navbar />
-      <div className="py-24 flex flex-col items-center justify-items-center gap-16 w-1/2 bg-IGLnoir text-IGLblanc font-montserrat overflow-clip">
+      <Navbar user={props.user} />
+      <div className="pb-36 pt-16 flex flex-col items-center justify-items-center gap-16 w-1/2 bg-IGLnoir text-IGLblanc font-montserrat overflow-clip">
         <h1 className="self-start font-bold text-4xl">Déposer une annonce</h1>
         <form className="flex flex-row flex-wrap w-full justify-between text-center gap-16">
           <Select

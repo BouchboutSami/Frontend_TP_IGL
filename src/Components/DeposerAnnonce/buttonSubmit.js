@@ -2,6 +2,10 @@ import React from "react";
 import Button from "@mui/material/Button";
 
 const buttonSubmit = (props) => {
+  var color = "#FF9505";
+  if (props.color) {
+    color = "#C70000";
+  }
   return (
     <Button
       onClick={() => {
@@ -16,7 +20,7 @@ const buttonSubmit = (props) => {
         fontFamily: "Montserrat",
         fontWeight: "bold",
         "&:hover": {
-          backgroundColor: "#FF9505",
+          backgroundColor: color,
         },
       }}
     >

@@ -2,13 +2,15 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="text-center bg-gray-900 text-white border-t-4 justify-self-end flex w-screen">
+    <footer className="text-center bg-IGLnoir text-white border-t-4 justify-self-end flex w-screen">
       <div className="pt-6">
         <div className="flex justify-center items-center mb-6">
           <a
-            href="#!"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="mailto:ks_bouchbout@esi.dz"
             type="button"
-            className="rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1"
+            className="rounded-full border-2 border-IGLorange text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1"
           >
             <svg
               aria-hidden="true"
@@ -27,9 +29,11 @@ const Footer = () => {
             </svg>
           </a>
           <a
-            href="#!"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.linkedin.com/in/sami-bouchbout/"
             type="button"
-            className="rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1"
+            className="rounded-full border-2 border-IGLorange text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1"
           >
             <svg
               aria-hidden="true"
@@ -48,9 +52,11 @@ const Footer = () => {
             </svg>
           </a>
           <a
-            href="#!"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/BouchboutSami/Frontend_TP_IGL"
             type="button"
-            className="rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1"
+            className="rounded-full border-2 border-IGLorange text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1"
           >
             <svg
               aria-hidden="true"
@@ -74,8 +80,8 @@ const Footer = () => {
           <form action="">
             <div className="grid md:grid-cols-3 gird-cols-1 gap-4 justify-center items-center">
               <div className="md:ml-auto md:mb-6">
-                <p className="">
-                  <strong>Sign up for our newsletter</strong>
+                <p className="text-IGLorange">
+                  <strong>Abonnez vous à notre newsletter</strong>
                 </p>
               </div>
 
@@ -97,7 +103,7 @@ const Footer = () => {
                 transition
                 ease-in-out
                 m-0
-                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                focus:text-IGLorange focus:bg-white focus:border-IGLorange focus:outline-none
               "
                   id="exampleFormControlInput1"
                   placeholder="Email address"
@@ -107,9 +113,9 @@ const Footer = () => {
               <div className="md:mr-auto mb-6">
                 <button
                   type="submit"
-                  className="inline-block px-6 py-2 border-2 border-white text-white font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                  className="inline-block px-6 py-2 border-2 border-IGLorange text-IGLorange font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                 >
-                  Subscribe
+                  S'abonner
                 </button>
               </div>
             </div>
@@ -128,27 +134,29 @@ const Footer = () => {
 
         <div className="grid justify-center w-full">
           <div className="mb-6">
-            <h5 className="uppercase font-bold mb-2.5">Etudiants</h5>
+            <h5 className="uppercase font-bold mb-2.5 text-IGLorange">
+              Etudiants
+            </h5>
 
             <ul className="list-none mb-0">
               <li>
                 <a href="#!" className="text-white">
-                  Bouchbout Sami
+                  Bouchbout Sami G2
                 </a>
               </li>
               <li>
                 <a href="#!" className="text-white">
-                  Aidouni Wacim
+                  Aidouni Wacim G2
                 </a>
               </li>
               <li>
                 <a href="#!" className="text-white">
-                  Amieur Imed Eddine
+                  Amieur Imed Eddine G9
                 </a>
               </li>
               <li>
                 <a href="#!" className="text-white">
-                  Benchelli Melissa
+                  Benchelli Melissa G9
                 </a>
               </li>
             </ul>

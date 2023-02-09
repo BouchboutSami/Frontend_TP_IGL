@@ -6,7 +6,7 @@ const maps = (props) => {
       <iframe
         title="Localisation"
         src={`https://maps.google.com/maps?q=" +
-            ${props.commune} +
+            ${props.commune} +" "+ ${props.wilaya}
             "&t=&z=13&ie=UTF8&iwloc=&output=embed`}
         width="100%"
         height="100%"
